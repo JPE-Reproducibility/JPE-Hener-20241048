@@ -1,6 +1,11 @@
-title: "Stand-in title"
-author: "Dr Prof James 'JayJay' Author"
-paper_id: 12345678
+title: "Deterrence or Backlash: Arrests and the Dynamics of Domestic Violence"
+author: "Hener"
 round: 1
-repo: "https://www.github.com/standin"
-dropbox_rel_path: "JPE/Author-12345678/1"
+repo: "https://github.com/JPE-Reproducibility/JPE-Hener-20241048"
+paper_id: 20241048
+journal: "JPE"
+paper_slug: "Hener-20241048"
+dropbox_rel_path: "JPE/Hener-20241048/1"
+package_size_gb: 0.0
+package_max_file_size_gb: 2
+package_max_pkg_size_gb: 10
