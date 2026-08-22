@@ -1,6 +1,6 @@
 ## Filepaths Analysis Details
 
-**/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241048-1/replication-package/replication_package_public/replication/code/02_analysis.do**
+**/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241048-2/replication-package/replication_package_public/replication/code/02_analysis.do**
 
 - Line 785, unix : replace hh_resptime_minw95=hh_resptime_minw95/100
 - Line 786, unix : replace Slsaohh_resptime_minw95_dvcallh=Slsaohh_resptime_minw95_dvcallh/100
@@ -9,7 +9,7 @@
 - Line 1979, unix : forvalues n=1/6{
 - Line 2156, unix : forvalues day=1/2 {
 
-**/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241048-1/replication-package/replication_package_public/replication/code/01_build_sample.do**
+**/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241048-2/replication-package/replication_package_public/replication/code/01_build_sample.do**
 
 - Line 305, unix : gen bb=seconds/60
 - Line 339, unix : gen wardcalls_perpop = sum_dvcallsbyward/ward_pop

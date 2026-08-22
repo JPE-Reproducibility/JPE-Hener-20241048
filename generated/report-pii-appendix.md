@@ -1,22 +1,8 @@
 ## Appendix: Detailed PII Detection Results
 
-*Generated on 2026-07-09 11:17:31*
+*Generated on 2026-08-22 15:21:33*
 
 This appendix lists all detected instances of potential personally identifiable information (PII) in the project files. Each entry shows the matched PII terms and, for data files, sample values to help verify whether the flagged content is indeed sensitive.
-
-### Data Files
-
-**/replication-package/replication_package_public/Rawdata/ward_housingtype.dta**
-
-- Variable: `Fraction_Flats` (label: *Fraction_Flats*)
-  - Matched terms: lat
-  - Sample values: 0.27566137566137566, 0.11408421489317569, 0.1504015575565831
-
-**/replication-package/replication_package_public/Rawdata/wards_population.dta**
-
-- Variable: `ward` (label: *Ward Name 1*)
-  - Matched terms: name
-  - Sample values: Acocks Green Ward, Aston Ward, Bartley Green Ward
 
 ### Code Files
 

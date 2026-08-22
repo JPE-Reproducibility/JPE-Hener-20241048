@@ -1,0 +1,312 @@
+                      README
+
+                      Overview
+                      The code in this replication package constructs the analysis ffle from source
+                      ffles provided by the West Midlands Police Force. One code ffle for STATA
+                      runs all of the code to generate the estimation data and to produce the 3 main
+                      ffgures, 6 main tables, 2 appendix ffgures, and 8 appendix tables in the paper.
+                      Moreover, auxiliary results mentioned in the paper are produced here as well.
+                      The replicator should expect the code to run for about 22 hours.
+
+                      Data Availability and Provenance Statements
+                      The data used in this article consist of administrative records provided by
+                      West Midlands Police (WMP) under a formal Information Sharing Agreement
+                      (ISA) between West Midlands Police, the University of Birmingham, and the ifo
+                      Institute, Munich (Version 3.0, May 2018).
+                      The authors are secondary data users; the data were generated and held by
+                      West Midlands Police and accessed under the terms of the ISA. The data are
+                      stored at the ifo Institute, Munich (Poschingerstraße 5, 81679 München) on
+                      a secure, password-protected server with restricted access. Security measures
+                      include device-level encryption and continuous IT-breach monitoring by the ifo
+                      IT team. The data cannot be redistributed as part of a replication package.
+                      Access is restricted to parties named in the ISA, and personal data may not be
+                      published in identiffable form unless the individuals concerned have provided
+                      explicit consent.
+                      Researchers wishing to replicate this work should contact the WMP Evidence
+                      Based Practice Team (our contact at the time of signing the ISA was Jenny
+                      Richards; evidencebasedpractice@west-midlands.pnn.police.uk; 0845 113 5000
+                      Ext 801) to inquire about the conditions under which a new data-sharing
+                      agreement may be established. Any such access will be subject to WMP’s data
+                      governance procedures, ethical approval, and the execution of a new ISA.
+                      Auxiliary data used in this study (for two ffgures in the main text) comes from
+                      the British Crime Survey. To replicate the numbers, download the replication
+                      package (https://onlinelibrary.wiley.com/doi/abs/10.1111/ecoj.12246), obtain
+                      survey access, run the code in "BCS2005_EJ.do" and "Dataset_Final_EJ.do",
+                      and place "Analysis_Final_EJ.dta" in the Rawdata folder.
+
+                      Statement about Rights
+                        ⊠I certify that the author(s) of the manuscript have legitimate access to and
+                          permission to use the data used in this manuscript.
+                        □I certify that the author(s) of the manuscript have documented permission
+                          to redistribute/publish the data contained within this replication package.
+                          Appropriate permission are documented in the LICENSE.txt ffle.
+
+
+                                                  1                      Summary of Availability
+                        □All dataarepublicly available.
+                        □Some datacannot be madepublicly available.
+                        ⊠No data can be madepublicly available.
+                          INSTRUCTIONS: IfNo or some data can be madepubliclyavailable,
+                          the journal may require that data be preserved for a speciffed time.
+                        □Conffdential data used in this paper and not provided as part of the public
+                          replication package will be preserved for ___ years after publication, in
+                          accordance with journal policies.
+
+                      Dataset list
+
+                      Data ffle Source Notes             Provided
+                      res_crimes_new2.dtaWest Midlands   Offfcer-level incident   No
+                                         Police          records: on-scene
+                                                        actions, timestamps,
+                                                        call grade
+                                                        Required variables:
+                                                        arrived_date_time
+                                                        cancelled_date_time
+                                                        crime_number dis-
+                                                        patched_date_time
+                                                        gradedresponse
+                                                        incident_date
+                                                        incidentnumber
+                                                        incident_time
+                                                        incident_result
+                                                        int_ref_number
+                                                        left_date_time
+                                                        offfcer_collar_anonwarks1019_new.dtaWest Midlands   Crime classiffcations   No
+                                         Police          and grid references
+                                                        Required Variables:
+                                                        int_ref_number osgr
+                                                        initial_classiffcation
+                                                        ffnal_classiffcation
+                                                        qualiffer
+                      caller1017.dtaWest Midlands   Caller status (victim / No
+                                         Police          third party)
+                                                        Required variables:
+                                                        int_ref_number
+                                                        caller_status
+
+
+
+
+                                                  2                      Data ffle Source Notes             Provided
+                      callh_vars.dtaWest Midlands   Call-handler         No
+                                         Police          attributes (experience,
+                                                        sex)
+                                                        Required variables:
+                                                        int_ref_number
+                                                        callh_years_service
+                                                        ch_gender
+                                                        call_handleridcrimes_201019_new.dtaWest Midlands   Crime database with  No
+                                         Police          investigation and
+                                                        charge outcomes
+                                                        Required variables:
+                                                        crimenumber
+                                                        vict_nominalrefurn1
+                                                        vict_cuc_codepolice_char_dec18.dtaWest Midlands   Offfcer characteristics: No
+                                         Police          age, sex, experience
+                                                        Required variables:
+                                                        offfcer_collar_anon
+                                                        age sex years_service
+                      wards_matched_IV.dtaWest Midlands   Ward assignment of   No
+                                         Police          geolocations
+                                                        Required variables:
+                                                        osgr ward_name
+                      wards_population.dtaONS Ward-level population Yes
+                                                        counts
+                      ward_housingtype.dtaNOMIS Dwelling types by    Yes
+                                                        ward (fraction ffats)
+                      datefile.dtaAuthors Calendar ffle Yes
+                      Analysis_Final_EJ.dtaBritish Crime    BCS 2005 extract     No
+                                         Survey         used for Sec. 2.1;
+                                                        requires separate
+                                                        access (see code
+                                                        comment at line 2250)
+
+
+                      Computational requirements
+                      The code can be run with standard computer hardware and a Stata version 15
+                      or later. The code detects installed software and installs missing packages.
+
+                      Software Requirements
+
+
+                        ⊠The replication package contains one or more programs to install all
+
+
+                                                  3                          dependencies and set up the necessary directory structure.
+                        •Stata (code was last run with version 18.5)
+                            –pkgs, ftools, reghdfe, ranktest, ivreghdfe, estout, moremata, mtefe,
+                              reghdfe, ivreghdfe, esttab, eststo, mtefe
+                            –the program “0_install_dependencies.do” is called automatically
+                              from the master, checks for existing packages, and will install all
+                              dependencies locally if needed.
+
+                      Controlled Randomness
+                        ⊠Random seed is set at line 43 in master.do and for each program using
+                          random numbers
+                        □No Pseudo random generator is used in the analysis described here.
+
+                      Memory, Runtime, Storage Requirements
+                      SummaryApproximate time needed to reproduce the analyses on a standard
+                      (CURRENT YEAR) desktop machine:
+                        □<10 minutes
+                        □10-60 minutes
+                        □1-2 hours
+                        □2-8 hours
+                        ⊠8-24 hours
+                        □1-3 days
+                        □3-14 days
+                        □> 14 days
+                      Approximate storage space needed:
+                        □< 25 MBytes
+                        □25 MB - 250 MB
+                        □250 MB - 2 GB
+                        ⊠2 GB - 25 GB
+                        □25 GB - 250 GB
+                        □> 250 GB
+                        □Not feasible to run on a desktop machine, as described below.
+
+                      DetailsThe code was last run in Stata 18.0 MP Parallel Edition, on Intel(R)
+                      Xeon(R) Platinum 8360Y CPU with 2.40GHz, 250 GB RAM, on 64-bit Windows
+                      Server 2019 Standard Version 1809.
+
+
+
+
+
+                                                  4                      Description of programs/code
+                          All code is being controlled by master.do. Running it prompts
+                          01_build_sample.do to, which builds the estimation dataset from
+                          the raw data ffles. Then, 02_analysis.do is started, which produces
+                          all ffgures, tables, and other exhibits in the paper.
+                        •The ffleprograms/code/01_build_sample.dowill extract and reformat
+                          all datasets referenced above. Intermediate data ffles are save in Tempdata
+                          folder and the ffnal estimation data set is saved in Estdata folder.
+                        •The ffleprograms/code/02_analysis.dogenerates all tables, ffgures, and
+                          other mentions of results in the main body and appendix of the article
+                          and are saved in the Results folder. Output ffles are called corresponding
+                          names also found in the manuscript.
+                        •The programprograms/code/0_install_dependencies.domakes sure
+                          and installs if necessary all needed dependencies for stata.
+                        •The programprograms/master.dostarts all programs in order.
+
+                      Instructions to Replicators
+                        •Store the ffles and folders contained in the replication package in a
+                          yourfolder/replication/and place the raw data ffles described above
+                          inyourfolder/Rawdata/.
+                        •Editreplication/master.doto adjust the default path
+                        •Runreplication/master.doto produce all intermediate data and all
+                          results.
+
+                      Details
+                        •replication/code/0_install_dependencies.do:
+                            –Installs all required Stata packages if they are not already available.
+                        •replication/code/01_build_sample.do:
+                            –Reads the raw data ffles from theRawdatafolder.
+                            –Cleans, merges, and reformats the data to construct the estimation
+                              dataset.
+                            –Intermediate datasets are stored in theTempdatafolder and the ffnal
+                              estimation dataset is saved in theEstdatafolder.
+                        •replication/code/02_analysis.do:
+                            –Produces all tables and ffgures reported in the main text and appendix.
+                            –Output is saved in theResultsfolder using fflenames corresponding
+                              to the manuscript.
+                            –This program should be run only after01_build_sample.dohas
+                              completed successfully.
+                        •replication/master.do:
+                            –Creates all required output directories.
+                            –Executes all programs in the correct order:0_install_dependencies.do,
+                              01_build_sample.do, and02_analysis.do.
+
+
+                                                  5                            –Running this ffle reproduces all intermediate datasets, tables, and
+                              ffgures used in the manuscript.
+
+                      List of tables and programs
+                      The provided code reproduces:
+                        ⊠All numbers provided in text in the paper
+                        ⊠All tables and ffgures in the paper
+                        □Selected tables and ffgures in the paper, as explained and justiffed below.
+
+                      Figure/Table               Line
+                      # Program       Number Output ffle
+                      Figure 1 02_analysis.do 130 Figure1_shares_log.txt
+                      Table 1 02_analysis.do 182 Table1.tex
+                      Figure 2 02_analysis.do 232 Figure2.png
+                      Table 2     02_analysis.do 279 Table2a.tex
+                      (Panel A)
+                      Table 2     02_analysis.do 279 Table2b.tex
+                      (Panel B)
+                      Table 3 02_analysis.do 494 Table3.tex
+                      Table 4 02_analysis.do 610 Table4.tex
+                      Table 5     02_analysis.do 702 Table5a.tex
+                      (Panel A)
+                      Table 5     02_analysis.do 702 Table5b.tex
+                      (Panel B)
+                      Table 6 02_analysis.do 772 Table6.tex
+                      Figure 3 02_analysis.do 860 Figure3.png
+                      Figure A1 02_analysis.do 889 FigureA1.png
+                      Figure A2 02_analysis.do 936 FigureA2.png
+                      Table A1 02_analysis.do 943 TableA1.txt
+                      Table A2 02_analysis.do 975 TableA2.txt
+                      Table A3    02_analysis.do 1167 TableA3a.tex
+                      (Panel A)
+                      Table A3    02_analysis.do 1167 TableA3b.tex
+                      (Panel B)
+                      Table A4 02_analysis.do 1248 TableA4.tex
+                      Table A5 02_analysis.do 1322 TableA5.tex
+                      Table A6 02_analysis.do 1434 TableA6.txt
+                      Table A7 02_analysis.do 1459 TableA7.tex
+                      Table A8 02_analysis.do 1719 TableA8.tex
+                      (Sec. 2.3) 02_analysis.do 1883 Text_section23_log.txt
+                      (Footnote    02_analysis.do 1897 Text_footnote17_log.txt
+                      17)
+                      (Sec. 3.1) 02_analysis.do 1897 Text_section31_log.txt
+                      (Sec. 3.2) 02_analysis.do 1897 Text_section32_log.txt
+
+
+                                                  6                      Figure/Table               Line
+                      # Program       Number Output ffle
+                      (Sec. 4,      02_analysis.do 1933     Text_section4_compliershares_log.txt
+                      shares)
+                      (Sec. 4,      02_analysis.do 1956 Text_section4_complierols_log.txt
+                      OLS)
+                      (Footnote    02_analysis.do 1998 Text_footnote24.tex
+                      24)
+                      (Sec. 5.2–    02_analysis.do 2092 Text_section52_53_reporting.tex
+                      5.3)
+                      (Footnote    02_analysis.do 2150 Text_footnote27_short.tex
+                      27)
+                      (Sec. 7.1) 02_analysis.do 2184     Text_section71_investshare_log.txt
+                      (Footnote    02_analysis.do 2196 Text_footnote30_log.txt
+                      30)
+                      (Sec. 8,      02_analysis.do 2209 Text_section8_nevertaker_log.txt
+                      never-taker)
+                      (Sec. 8,      02_analysis.do 860 Text_section8_prte_boot.tex
+                      PRTE)
+                      (Sec. 2.1     02_analysis.do 2229 Text_section21_log.txt
+                      BCS
+                      numbers)
+
+
+                      References
+                      Amaral, Soffa, Gordon B. Dahl, Timo Hener, Victoria Kaiser, and Helmut Rainer.
+                      “Deterrence or Backlash? Arrests and the Dynamics of Domestic Violence.”
+                      West Midlands Police. Administrative Records on Domestic Violence Incidents,
+                      2010–2019. Provided under Information Sharing Agreement (Version 3.0, May
+                      2018) with the University of Birmingham and the ifo Institute, Munich. Contact:
+                      evidencebasedpractice@west-midlands.pnn.police.uk.
+                      Offfce for National Statistics (ONS). Ward-level Population Estimates. Available
+                      at: https://www.ons.gov.uk.
+                      NOMIS / Offfce for National Statistics. Dwelling Types by Ward. Available via
+                      the NOMIS web service: https://www.nomisweb.co.uk.
+                      Anderberg, Dan, Helmut Rainer, Jonathan Wadsworth, and Tanya Wilson,
+                      (2016). Unemployment and domestic violence: Theory and evidence. The
+                      Economic Journal, 126(597), 1947-1979.
+
+
+
+
+
+
+
+                                                  7
